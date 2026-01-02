@@ -8,6 +8,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
@@ -89,7 +91,7 @@ jobs:
           sed -i "s|SHA_PLACEHOLDER|${SHA}|" PKGBUILD
           sed -i 's|^          ||' PKGBUILD
 
-          docker run --rm -v "$PWD:/pkg" archlinux:latest bash -c "pacman -Sy --noconfirm pacman-contrib && cd /pkg && makepkg --printsrcinfo > .SRCINFO"
+          docker run --rm -v "$PWD:/pkg" archlinux:latest bash -c "pacman -Sy --noconfirm pacman-contrib sudo && useradd -u 1001 builder && chown -R builder /pkg && cd /pkg && sudo -u builder makepkg --printsrcinfo > .SRCINFO && chown -R 1001:1001 /pkg"
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
