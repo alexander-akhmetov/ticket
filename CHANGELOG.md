@@ -4,6 +4,7 @@
 
 ### Added
 - `list` command alias for `ls`
+- `TICKET_PAGER` environment variable for `show` command (falls back to `PAGER`, only when stdout is a TTY)
 
 ### Changed
 - Walk parent directories to find `.tickets/` directory, enabling commands from any subdirectory
