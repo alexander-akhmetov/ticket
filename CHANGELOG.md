@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- `TICKET_PAGER` environment variable for `show` command (falls back to `PAGER`, only when stdout is a TTY)
 - Support `TICKETS_DIR` environment variable for custom tickets directory location
 - `dep cycle` command to detect dependency cycles in open tickets
 - `add-note` command for appending timestamped notes to tickets
